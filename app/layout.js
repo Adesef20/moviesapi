@@ -1,5 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
+                                                                    
+import { fetchMovies } from "./libs/fetchMovies";
+import Image from "next/image";
+import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,12 +23,31 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const movies = fetchMovies();
+  const { pathname } = headers();
+  
+
+  const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+  const backgroundImage = randomMovie?.backdrop_path;
+
+  const path = pathname || "/";
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className="relative min-h-screen bg-gray-900">
+        {backgroundImage && (
+          <Image 
+          src={`https://image.tmdb.org/t/p/original${ backgroundImage}`}
+          alt="Background Image"
+          fill
+          className="brightness-75 object-cover transition-all duration-700 -z-10"
+          priority={path === "/"}
+          />
+        )}
+          <Navbar />
+          {children}
+          <Footer />
+        
       </body>
     </html>
   );
