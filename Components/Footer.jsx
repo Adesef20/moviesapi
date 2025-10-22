@@ -18,7 +18,7 @@ const Footer = () => {
                     <ul>
                         <li className="flex flex-col space-y-2">
                             <Link href="/" className="my-2 hover:text-yellow-500">Home</Link>
-                            <Link href="/Movie" className="my-2 hover:text-yellow-500">Movie</Link>
+                            <Link href="/Movies" className="my-2 hover:text-yellow-500">Movies</Link>
                             <Link href="/Trending" className="my-2 hover:text-yellow-500">Trending</Link>
                             <Link href="/Favourite" className="my-2 hover:text-yellow-500">Favourite</Link>
                         </li>
